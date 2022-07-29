@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">RecycleView_App_Practice</string>
+
+    <string-array name="animal_list">
+        <item>Kucing</item>
+        <item>Gajah</item>
+        <item>Ular</item>
+        <item>Harimau</item>
+        <item>Kanguru</item>
+        <item>Elang</item>
+        <item>Keledai</item>
+        <item>Jerapah</item>
+        <item>Domba</item>
+        <item>Sapi</item>
+        <item>Kuda</item>
+    </string-array>
+</resources>
