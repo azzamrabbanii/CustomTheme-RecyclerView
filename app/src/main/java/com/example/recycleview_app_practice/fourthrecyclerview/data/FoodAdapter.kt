@@ -10,12 +10,6 @@ class FoodAdapter(): RecyclerView.Adapter<FoodAdapter.FoodViewHolder>() {
 
     var listFood = ArrayList<CategoriesItem>()
 
-    fun setData(list: List<CategoriesItem>?) {
-        if (list == null) return
-        this.listFood.clear()
-        this.listFood.addAll(listFood)
-    }
-
     class FoodViewHolder(val binding: FoodItemBinding): RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = FoodViewHolder (
@@ -32,4 +26,10 @@ class FoodAdapter(): RecyclerView.Adapter<FoodAdapter.FoodViewHolder>() {
     }
 
     override fun getItemCount() = listFood.size
+
+    fun setData(list: List<CategoriesItem>?) {
+        if (list == null) return
+        this.listFood.clear()
+        this.listFood.addAll(list)
+    }
 }
