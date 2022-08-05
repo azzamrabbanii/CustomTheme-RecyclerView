@@ -3,6 +3,7 @@ package com.example.recycleview_app_practice
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.recycleview_app_practice.cakejsondata.CakeActivity
 import com.example.recycleview_app_practice.databinding.ActivityMainBinding
 import com.example.recycleview_app_practice.firstrecyclerview.FirstActivity
 import com.example.recycleview_app_practice.fourthrecyclerview.FourthActivity
@@ -35,6 +36,11 @@ class MainActivity : AppCompatActivity() {
 
         binding.fourthRecyclerView.setOnClickListener {
             val intent = Intent(this, FourthActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.cakeRecyclerView.setOnClickListener {
+            val intent = Intent(this, CakeActivity::class.java)
             startActivity(intent)
         }
     }

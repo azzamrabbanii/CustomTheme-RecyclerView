@@ -26,6 +26,7 @@ class ThirdActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         getListPahlawan()
+        pahlawanAdapter = PahlawanAdapter(modelPahlawan)
         setupRecyclerView()
 
     }
@@ -38,35 +39,40 @@ class ThirdActivity : AppCompatActivity() {
         }
     }
 
-    fun getListPahlawan(){
+    fun getListPahlawan() {
+        // proses membuka asset json dengan kotlin
+        val strContext = getJSONObject()
         try {
-            // proses membuka asset json dengan kotlin
-            val stream = assets.open("pahlawan_nasional.json")
-            val size = stream.available()
-            val buffer = ByteArray(size)
-            stream.read(buffer)
-            stream.close()
-            val strContext = String(buffer, StandardCharsets.UTF_8)
-            try {
-                val jsonObject = JSONObject(strContext)
-                // cara memangil jsonArray di jsonObject
-                val jsonArray = jsonObject.getJSONArray("daftar_pahlawan")
-                for (i in 0 until  jsonArray.length()){
-                    val jsonObjectData = jsonArray.getJSONObject(i)
-                    val dataApi = ModelPahlawan()
-                    dataApi.nama = jsonObjectData.getString("nama")
-                    dataApi.namaLengkap = jsonObjectData.getString("nama2")
-                    dataApi.image = jsonObjectData.getString("img")
-                    modelPahlawan.add(dataApi)
-                }
-                pahlawanAdapter = PahlawanAdapter(modelPahlawan)
-            }catch (e : JSONException){
-                // Log.e("ERROR", e.toString())
-                e.printStackTrace()
+            val jsonObject = JSONObject(strContext)
+            // cara memangil jsonArray di jsonObject
+            val jsonArray = jsonObject.getJSONArray("daftar_pahlawan")
+            for (i in 0 until jsonArray.length()) {
+                val jsonObjectData = jsonArray.getJSONObject(i)
+                val dataApi = ModelPahlawan()
+                dataApi.nama = jsonObjectData.getString("nama")
+                dataApi.namaLengkap = jsonObjectData.getString("nama2")
+                dataApi.image = jsonObjectData.getString("img")
+                modelPahlawan.add(dataApi)
             }
-        }catch (e : IOException){
-            Toast.makeText(this, "error!!! try again", Toast.LENGTH_SHORT).show()
+        } catch (e: JSONException) {
+            // Log.e("ERROR", e.toString())
+            e.printStackTrace()
         }
     }
 
+    fun getJSONObject(): String? {
+        val str: String
+        try {
+            str = assets.open("pahlawan_nasional.json").bufferedReader().use { it.readText() }
+//            val size = stream.available()
+//            val buffer = ByteArray(size)
+//            stream.read(buffer)
+//            stream.close()
+//            str = String(buffer, StandardCharsets.UTF_8)
+        } catch (e: IOException) {
+            Toast.makeText(this, "error!!! try again", Toast.LENGTH_SHORT).show()
+            return null
+        }
+        return str
+    }
 }

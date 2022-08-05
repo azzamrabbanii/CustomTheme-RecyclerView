@@ -1,6 +1,6 @@
 package com.example.recycleview_app_practice.fourthrecyclerview.data.network
 
-import com.example.recycleview_app_practice.BuildConfig
+import  com.example.recycleview_app_practice.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
